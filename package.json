@@ -1,0 +1,27 @@
+{
+  "name": "agorabot",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arckenver/AgoraBot.git"
+  },
+  "author": "Arckenver <arckenver@gmail.com>",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Arckenver/AgoraBot#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "pug": "^2.0.0-beta10",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "bootstrap": "^3.3.7",
+    "css-loader": "^0.26.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jquery": "^3.1.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

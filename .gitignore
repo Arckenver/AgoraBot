@@ -1,3 +1,7 @@
+# Misc
+
+web/public/bundle.*
+
 # Logs
 logs
 *.log
