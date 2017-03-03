@@ -14,6 +14,7 @@ var config = {
 	resolve: {
 		alias: {
 			jquery: "jquery/src/jquery",
+			chart: "chart.js/src/chart.js",
 			bootstrap: "bootstrap/dist/js/bootstrap.js",
 		}
 	},
@@ -33,7 +34,8 @@ var config = {
 		new ExtractTextPlugin('bundle.css'),
 		new webpack.ProvidePlugin({
 			$: "jquery",
-			jQuery: "jquery"
+			jQuery: "jquery",
+			Chart: "chart.js"
 		})
 	]
 };

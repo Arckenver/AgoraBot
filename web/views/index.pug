@@ -4,25 +4,22 @@ html
 		meta(charset='utf-8')
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		title AgoraBot
-		link(href='https://fonts.googleapis.com/css?family=Lato', rel='stylesheet')
 		link(href='/public/bundle.css', rel='stylesheet')
 	body
 		.container
-			.row
-				.col-sm-12
-					.main-title
-						AgoraBot
+			.main-title.text-center
+				| AgoraBot
 			hr
 			.row
-				.col-sm-6
+				.col-md-6.col-sm-7
 					h3 Video
-				.col-sm-6
+				.col-md-6.col-sm-5
 					h3 Vote
 			hr
 			.row
 				.col-sm-12
-					p.text-muted
-						span.pull-left Droite
-						span Milieu
-						span.pull-right Gauche
+					p.text-muted.text-center
+						//span.pull-left Droite
+						| © 2017 AgoraBot
+						//span.pull-right Gauche
 		script(src='/public/bundle.js')
