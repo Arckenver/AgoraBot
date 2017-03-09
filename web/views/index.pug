@@ -11,15 +11,28 @@ html
 				| AgoraBot
 			hr
 			.row
-				.col-md-6.col-sm-7
-					h3 Video
-				.col-md-6.col-sm-5
-					h3 Vote
+				.col-sm-7
+					.embed-responsive.embed-responsive-16by9
+						iframe.embed-responsive-item(height="100%", src="http://www.youtube.com/embed/MYZ67-Sh7kM?enablejsapi=1")
+				.col-sm-5
+					.form-group
+						img#chartLoading(src="/public/img/loading.gif")
+					.form-group
+						select.form-control
+							option Move forward
+							option Turn right
+							option Turn left
+							option Turn right backward
+							option Turn left backward
+					.form-group.text-center
+						button.btn.btn-primary
+							i.fa.fa-paper-plane
+							| &nbsp;&nbsp;Vote
 			hr
 			.row
 				.col-sm-12
 					p.text-muted.text-center
 						//span.pull-left Droite
-						| © 2017 AgoraBot
+						| AgoraBot
 						//span.pull-right Gauche
 		script(src='/public/bundle.js')
