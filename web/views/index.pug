@@ -11,12 +11,14 @@ html
 				| AgoraBot
 			hr
 			.row
-				.col-sm-7
+				.col-sm-7.col-md-8
 					.embed-responsive.embed-responsive-16by9
-						iframe.embed-responsive-item(height="100%", src="http://www.youtube.com/embed/MYZ67-Sh7kM?enablejsapi=1")
-				.col-sm-5
+						img(width="100%", src="/public/img/16-9.png")
+						//iframe.embed-responsive-item(height="100%", src="http://www.youtube.com/embed/MYZ67-Sh7kM?enablejsapi=1")
+				.col-sm-5.col-md-4
 					.form-group
-						img#chartLoading(src="/public/img/loading.gif")
+						#chartWrapper
+							img#chartLoading(src="/public/img/loading.gif")
 					.form-group
 						select.form-control
 							option Move forward
@@ -25,8 +27,8 @@ html
 							option Turn right backward
 							option Turn left backward
 					.form-group.text-center
-						button.btn.btn-primary
-							i.fa.fa-paper-plane
+						button#voteBtn.btn.btn-primary
+							i#voteIcon.fa.fa-paper-plane
 							| &nbsp;&nbsp;Vote
 			hr
 			.row

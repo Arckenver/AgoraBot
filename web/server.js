@@ -2,8 +2,14 @@
  *
  */
 
+var http = require('http');
+
 var app = require('./app');
 
-app.listen(8000, () => {
+var server = http.createServer(app);
+
+require('./wss')(server);
+
+server.listen(8000, () => {
 	console.log('Server listening...');
 });

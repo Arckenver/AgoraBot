@@ -24,6 +24,7 @@
     "pug": "^2.0.0-beta10",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "ws": "^2.2.2"
   }
 }
