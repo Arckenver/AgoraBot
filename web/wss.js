@@ -119,7 +119,10 @@ var onUpdate = () => {
 
 	for (var id in clients)
 	{
-		clients[id].socket.send(data);
+		if (clients[id].socket.readyState === ws.OPEN)
+		{
+			clients[id].socket.send(data);
+		}
 	}
 };
 
