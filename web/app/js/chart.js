@@ -2,7 +2,7 @@
  *
  */
 
-const initChart = () => {
+const initChart = (callback) => {
 	$("<canvas></canvas>", {id: "chart"})
 		.insertAfter("#chartLoading")
 		.ready(() => {
@@ -13,6 +13,7 @@ const initChart = () => {
 					type: 'pie',
 					data: {
 						labels: [
+							"No vote",
 							"Move forward",
 							"Turn right",
 							"Turn left",
@@ -21,8 +22,9 @@ const initChart = () => {
 						],
 						datasets: [
 							{
-								data: [1, 1, 1, 1, 1],
+								data: [1, 1, 1, 1, 1, 1],
 								backgroundColor: [
+									"#888888",
 									"#3498DB",
 									"#F1C40F",
 									"#E74C3C",
@@ -30,6 +32,7 @@ const initChart = () => {
 									"#9B59B6"
 								],
 								hoverBackgroundColor: [
+									"#787878",
 									"#2980B9",
 									"#F39C12",
 									"#C0392B",
@@ -42,6 +45,7 @@ const initChart = () => {
 					options: {}
 				}
 			)
+			callback(chart)
 		}
 	)
 }

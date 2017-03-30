@@ -16,18 +16,24 @@ export default class VoteBtn
 		$(this.iconSelector).removeClass('fa-cog')
 		$(this.iconSelector).removeClass('fa-spin')
 		$(this.btnSelector).prop("disabled", false)
+		$(this.btnSelector).removeClass('btn-primary')
+		$(this.btnSelector).removeClass('btn-danger')
 		switch(state)
 		{
 			case "default":
 				$(this.iconSelector).addClass('fa-paper-plane')
+				$(this.btnSelector).addClass('btn-primary')
 				break
 			case "loading":
 				$(this.iconSelector).addClass('fa-cog')
 				$(this.iconSelector).addClass('fa-spin')
 				$(this.btnSelector).prop('disabled', true)
+				$(this.btnSelector).addClass('btn-primary')
 				break
 			case "error":
-				//$(this.iconSelector).addClass('')
+				$(this.iconSelector).addClass('fa-ban')
+				$(this.btnSelector).prop('disabled', true)
+				$(this.btnSelector).addClass('btn-danger')
 				break
 			default:
 				throw 'Invalid state for vote button'

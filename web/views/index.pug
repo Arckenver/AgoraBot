@@ -11,6 +11,8 @@ html
 				| AgoraBot
 			hr
 			.row
+				#alerts.col-sm-12
+			.row
 				.col-sm-7.col-md-8
 					.embed-responsive.embed-responsive-16by9
 						img(width="100%", src="/public/img/16-9.png")
@@ -29,7 +31,7 @@ html
 							option(value="TURN_LEFT_BACKWARD") Turn left backward
 					.form-group.text-center
 						button#voteBtn.btn.btn-primary
-							i#voteIcon.fa.fa-paper-plane
+							i#voteIcon.fa.fa-cog.fa-spin(disabled)
 							| &nbsp;&nbsp;Vote
 			hr
 			.row

@@ -56,9 +56,12 @@ var onClientConnection = (socket) =>
 	socket.on('message', (data) =>
 	{
 		var msg;
-		try {
+		try
+		{
 			msg = JSON.parse(data);
-		} catch (e) {
+		}
+		catch (e)
+		{
 			delete clients[id];
 			socket.terminate();
 			return;
@@ -91,11 +94,33 @@ var onConnection = (socket) =>
 				break;
 			default:
 				socket.terminate();
-				console.log('terminate 3');
 				return;
 		}
 		socket.send('OK');
 	}));
+};
+
+var onUpdate = () => {
+	var votes = {};
+
+	for (var id in clients)
+	{
+		if (!votes.hasOwnProperty(clients[id].action))
+		{
+			votes[clients[id].action] = 0;
+		}
+		votes[clients[id].action]++;
+	}
+
+	var data = JSON.stringify({
+		t: 'UPDATE_VOTES',
+		votes: votes
+	});
+
+	for (var id in clients)
+	{
+		clients[id].socket.send(data);
+	}
 };
 
 var onAction = () => {
@@ -109,4 +134,5 @@ var onAction = () => {
 module.exports = (server) => {
 	var wss = new ws.Server({server: server});
 	wss.on('connection', onConnection);
+	setInterval(onUpdate, 1000);
 };
