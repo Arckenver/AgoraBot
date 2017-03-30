@@ -5,94 +5,108 @@
 var ws = require('ws');
 var uuidv1 = require('uuid/v1');
 
-var Server = class {
+var actions = [
+	'MOVE_FORWARD',
+	'TURN_RIGHT',
+	'TURN_LEFT',
+	'TURN_RIGHT_BACKWARD',
+	'TURN_LEFT_BACKWARD'
+];
 
-	constructor(server)
+var clients = {};
+var robots = {};
+
+var onClientMessage = (client, msg) =>
+{
+	console.log(msg)
+	switch (msg.t)
 	{
-		this.clients = {};
-		this.robots = {};
-
-		this.wss = new ws.Server({server: server});
-		this.wss.on('connection', this.onConnection.bind(this));
-
-		setInterval(this.onAction.bind(this), 10000);
-	}
-
-	onVote(socket, action)
-	{
-		socket.vote = action;
-		socket.send(JSON.stringify({
-			t: 'CONFIRM_VOTE'
-		}));
-	}
-
-	onAction()
-	{
-
-	}
-
-	onConnection(socket)
-	{
-		socket.on('message', ((data) =>
-		{
-			socket.id = uuidv1();
-
-			switch (data)
+		case 'VOTE':
+			if (msg.action === null || actions.indexOf(msg.action) != -1)
 			{
-				case 'CLIENT':
-					this.clients[socket.id] = socket;
-					socket.vote = null;
-					break;
-				case 'ROBOT':
-					this.robots[socket.id] = socket;
-					break;
-				default:
-					socket.terminate();
-					return;
+				client.action = msg.action;
+				client.socket.send(JSON.stringify({
+					t: 'VOTE_CONFIRMED',
+					action: client.action
+				}));
 			}
-
-			socket.send('OK');
-
-			socket.on('message', ((data) =>
+			else
 			{
-				try
-				{
-					var msg = JSON.parse(data);
-				}
-				catch (e)
-				{
-					this.removeClient(socket, true);
-					return;
-				}
+				delete clients[client.id];
+				client.socket.terminate();
+			}
+			break;
 
-				switch (msg.t)
-				{
-					case 'VOTE':
-						this.onVote(socket, msg.action);
-						break;
-					default:
-						this.removeClient(socket, true);
-						return;
-				}
-			}).bind(this));
-		}).bind(this));
-	}
-
-	removeClient(socket, forceDisconnection)
-	{
-		delete this.clients[socket.id];
-
-		if (forceDisconnection)
-		{
-			socket.terminate();
-		}
-		else
-		{
-			socket.close();
-		}
+		default:
+			delete clients[client.id];
+			client.socket.terminate();
+			return;
 	}
 };
 
-module.exports = (httpServer) => {
-	return new Server(httpServer);
+var onClientConnection = (socket) =>
+{
+	var id = uuidv1();
+	var client = {
+		id: id,
+		socket: socket,
+		action: null
+	};
+	clients[id] = client;
+	socket.on('message', (data) =>
+	{
+		var msg;
+		try {
+			msg = JSON.parse(data);
+		} catch (e) {
+			delete clients[id];
+			socket.terminate();
+			return;
+		}
+		onClientMessage(client, msg);
+	});
+};
+
+var onRobotConnection = (socket) =>
+{
+	var id = uuidv1();
+	robots[id] = {
+		id: id,
+		socket: socket
+	};
+};
+
+var onConnection = (socket) =>
+{
+	socket.on('message', ((data) =>
+	{
+		socket.removeAllListeners('message');
+		switch (data)
+		{
+			case 'CLIENT':
+				onClientConnection(socket);
+				break;
+			case 'ROBOT':
+				onRobotConnection(socket);
+				break;
+			default:
+				socket.terminate();
+				console.log('terminate 3');
+				return;
+		}
+		socket.send('OK');
+	}));
+};
+
+var onAction = () => {
+	var actions = Object.values(this.clients)
+		.map((client) => client.action)
+		.filter((action) => action != null);
+
+
+};
+
+module.exports = (server) => {
+	var wss = new ws.Server({server: server});
+	wss.on('connection', onConnection);
 };

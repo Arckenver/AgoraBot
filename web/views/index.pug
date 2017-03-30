@@ -20,12 +20,13 @@ html
 						#chartWrapper
 							img#chartLoading(src="/public/img/loading.gif")
 					.form-group
-						select.form-control
-							option Move forward
-							option Turn right
-							option Turn left
-							option Turn right backward
-							option Turn left backward
+						select#voteSelect.form-control
+							option(value="") No vote
+							option(value="MOVE_FORWARD") Move forward
+							option(value="TURN_RIGHT") Turn right
+							option(value="TURN_LEFT") Turn left
+							option(value="TURN_RIGHT_BACKWARD") Turn right backward
+							option(value="TURN_LEFT_BACKWARD") Turn left backward
 					.form-group.text-center
 						button#voteBtn.btn.btn-primary
 							i#voteIcon.fa.fa-paper-plane

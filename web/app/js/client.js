@@ -24,15 +24,10 @@ export default class Client
 
 		switch (msg.t)
 		{
-			case 'CONFIRM_VOTE':
+			case 'VOTE_CONFIRMED':
 				voteBtn.setState('default')
 				break;
 		}
-	}
-
-	sendMessage(msg)
-	{
-		this.socket.send(JSON.stringify(msg))
 	}
 
 	onOpen(e)
@@ -46,7 +41,7 @@ export default class Client
 			}
 			else
 			{
-				throw 'Connection to websocket server refused';
+				throw 'Connection to websocket server refused'
 			}
 		}
 	}
@@ -56,8 +51,12 @@ export default class Client
 		initChart()
 
 		voteBtn.onClick(() => {
-			console.log('click !')
 			voteBtn.setState('loading')
+
+			this.socket.send(JSON.stringify({
+				t: 'VOTE',
+				action: $("#voteSelect > option:selected").val() || null
+			}))
 			// TODO send vote
 		})
 	}
@@ -65,5 +64,10 @@ export default class Client
 	onClose(e)
 	{
 
+	}
+
+	sendMessage(msg)
+	{
+		this.socket.send(JSON.stringify(msg))
 	}
 }
