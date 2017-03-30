@@ -130,8 +130,6 @@ var onAction = () => {
 	var actions = Object.values(this.clients)
 		.map((client) => client.action)
 		.filter((action) => action != null);
-
-
 };
 
 module.exports = (server) => {
