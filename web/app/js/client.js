@@ -26,7 +26,7 @@ export default class Client
 		{
 			case 'VOTE_CONFIRMED':
 				voteBtn.setState('default')
-				break;
+				break
 		}
 	}
 
@@ -57,7 +57,6 @@ export default class Client
 				t: 'VOTE',
 				action: $("#voteSelect > option:selected").val() || null
 			}))
-			// TODO send vote
 		})
 	}
 
