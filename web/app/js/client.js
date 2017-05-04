@@ -4,6 +4,7 @@
 
 import { initChart } from './chart.js'
 import VoteBtn from './votebtn.js'
+import actions from './actions.js'
 
 const voteBtn = new VoteBtn("#voteBtn")
 
@@ -26,6 +27,7 @@ export default class Client
 		{
 			case 'VOTE_CONFIRMED':
 				voteBtn.setState('default')
+				$("#voteIndicator").text(actions[msg.action])
 				break
 			case 'UPDATE_VOTES':
 				if (this.chart)
@@ -65,6 +67,7 @@ export default class Client
 			this.chart = chart
 
 			voteBtn.setState('default')
+			$("#voteIndicator").text(actions[null])
 
 			voteBtn.onClick(() => {
 				voteBtn.setState('loading')
@@ -85,7 +88,6 @@ export default class Client
 				"You've been disconnected from the server. Press F5 to reconnect." +
 			'</div>'
 		)
-		console.log('closed')
 	}
 
 	sendMessage(msg)

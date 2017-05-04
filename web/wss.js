@@ -18,7 +18,6 @@ var robots = {};
 
 var onClientMessage = (client, msg) =>
 {
-	console.log(msg)
 	switch (msg.t)
 	{
 		case 'VOTE':
@@ -32,13 +31,11 @@ var onClientMessage = (client, msg) =>
 			}
 			else
 			{
-				delete clients[client.id];
 				client.socket.terminate();
 			}
 			break;
 
 		default:
-			delete clients[client.id];
 			client.socket.terminate();
 			return;
 	}
@@ -53,6 +50,11 @@ var onClientConnection = (socket) =>
 		action: null
 	};
 	clients[id] = client;
+
+	socket.on('close', () => {
+		delete clients[id];
+	});
+	
 	socket.on('message', (data) =>
 	{
 		var msg;
@@ -62,7 +64,6 @@ var onClientConnection = (socket) =>
 		}
 		catch (e)
 		{
-			delete clients[id];
 			socket.terminate();
 			return;
 		}
@@ -77,6 +78,10 @@ var onRobotConnection = (socket) =>
 		id: id,
 		socket: socket
 	};
+
+	socket.on('close', () => {
+		delete clients[id];
+	});
 };
 
 var onConnection = (socket) =>
@@ -127,13 +132,30 @@ var onUpdate = () => {
 };
 
 var onAction = () => {
-	var actions = Object.values(this.clients)
-		.map((client) => client.action)
-		.filter((action) => action != null);
+
+	var actions = [];
+	for (var id in clients)
+	{
+		actions.push(clients[id].action);
+	}
+	var action = null;
+	if (actions.length)
+	{
+		action = actions[Math.floor(Math.random() * actions.length)];
+	}
+
+	for (var id in robots)
+	{
+		robots[id].socket.send(JSON.stringify({
+			t: 'EXECUTE_ACTION',
+			action: action
+		}));
+	}
 };
 
 module.exports = (server) => {
 	var wss = new ws.Server({server: server});
 	wss.on('connection', onConnection);
 	setInterval(onUpdate, 1000);
+	setInterval(onAction, 5000);
 };

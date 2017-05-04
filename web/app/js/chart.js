@@ -2,6 +2,8 @@
  *
  */
 
+import actions from "./actions"
+
 const initChart = (callback) => {
 	$("<canvas></canvas>", {id: "chart"})
 		.insertAfter("#chartLoading")
@@ -13,12 +15,12 @@ const initChart = (callback) => {
 					type: 'pie',
 					data: {
 						labels: [
-							"No vote",
-							"Move forward",
-							"Turn right",
-							"Turn left",
-							"Turn right backward",
-							"Turn left backward"
+							actions[null],
+							actions.MOVE_FORWARD,
+							actions.TURN_RIGHT,
+							actions.TURN_LEFT,
+							actions.TURN_RIGHT_BACKWARD,
+							actions.TURN_LEFT_BACKWARD
 						],
 						datasets: [
 							{
