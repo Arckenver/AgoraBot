@@ -1,4 +1,8 @@
-
+import client
 
 def main():
-    pass
+    print("Starting...")
+    ws = client.connect("ws://dev.arckenver.com:7801/")
+
+if __name__ == "__main__":
+    main()

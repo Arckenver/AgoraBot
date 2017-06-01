@@ -1,6 +1,7 @@
 # Misc
 
 web/public/bundle.*
+*.pyc
 
 # Logs
 logs
