@@ -80,6 +80,7 @@ var onRobotConnection = (socket) =>
 	};
 
 	socket.on('close', () => {
+		console.log(`socket ${id} closed !`)
 		delete robots[id];
 	});
 };
@@ -146,6 +147,7 @@ var onAction = () => {
 
 	for (var id in robots)
 	{
+		console.log("sending EXECUTE_ACTION to socket " + id)
 		robots[id].socket.send(JSON.stringify({
 			t: 'EXECUTE_ACTION',
 			action: action
