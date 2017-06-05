@@ -54,7 +54,7 @@ var onClientConnection = (socket) =>
 	socket.on('close', () => {
 		delete clients[id];
 	});
-	
+
 	socket.on('message', (data) =>
 	{
 		var msg;
@@ -153,8 +153,8 @@ var onAction = () => {
 	}
 };
 
-module.exports = (server) => {
-	var wss = new ws.Server({server: server});
+module.exports = (port) => {
+	var wss = new ws.Server({port: port});
 	wss.on('connection', onConnection);
 	setInterval(onUpdate, 1000);
 	setInterval(onAction, 5000);
