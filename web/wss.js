@@ -80,7 +80,7 @@ var onRobotConnection = (socket) =>
 	};
 
 	socket.on('close', () => {
-		delete clients[id];
+		delete robots[id];
 	});
 };
 

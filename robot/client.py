@@ -8,7 +8,7 @@ def on_open(ws):
 		ws.send("ROBOT")
 
 		while True:
-			print("continue")
+			pass
 
 		print("Websocket thread terminating")
 
