@@ -79,13 +79,7 @@ var onRobotConnection = (socket) =>
 		socket: socket
 	};
 
-	socket.on('error', () => {
-		console.log(`socket ${id} received error`)
-		delete robots[id];
-	});
-
 	socket.on('close', () => {
-		console.log(`socket ${id} closed`)
 		delete robots[id];
 	});
 };
@@ -152,11 +146,13 @@ var onAction = () => {
 
 	for (var id in robots)
 	{
-		console.log("sending EXECUTE_ACTION to socket " + id)
-		robots[id].socket.send(JSON.stringify({
-			t: 'EXECUTE_ACTION',
-			action: action
-		}));
+		if (robots[id].socket.readyState === ws.OPEN)
+		{
+			robots[id].socket.send(JSON.stringify({
+				t: 'EXECUTE_ACTION',
+				action: action
+			}));
+		}
 	}
 };
 
