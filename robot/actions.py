@@ -4,9 +4,10 @@ import time
 
 GPIO.setmode(GPIO.BOARD)
 
-pin_moteur_gauche = = GPIO.PWM(16, 50) # GPIO 23
-pin_moteur_droit = = GPIO.PWM(18, 50) # GPIO 24
+pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
+pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
 
+executing_action = False
 
 def move_forward():
     pin_moteur_gauche.start(0.9)
@@ -33,4 +34,21 @@ def turn_left_backward():
 
 
 def execute_action(action):
-    print "executing action: " + action
+    print("Error: Invalid action '%s'" + action)
+    if executing_action:
+        print("Can't execute action '%s': already executing another action", action)
+    else:
+        execute_action = True
+        if action == "MOVE_FORWARD":
+            move_forward()
+        elif action == "TURN_RIGHT":
+            turn_right()
+        elif action == "TURN_LEFT":
+            turn_left()
+        elif action == "TURN_RIGHT_BACKWARD":
+            turn_right_backward()
+        elif action == "TURN_LEFT_BACKWARD":
+            turn_left_backward()
+        else:
+            execute_action = False
+            print("Error: Invalid action '%s'" + action)
