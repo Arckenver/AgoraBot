@@ -79,8 +79,13 @@ var onRobotConnection = (socket) =>
 		socket: socket
 	};
 
+	socket.on('error', () => {
+		console.log(`socket ${id} received error`)
+		delete robots[id];
+	});
+
 	socket.on('close', () => {
-		console.log(`socket ${id} closed !`)
+		console.log(`socket ${id} closed`)
 		delete robots[id];
 	});
 };
