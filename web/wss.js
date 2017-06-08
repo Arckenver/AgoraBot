@@ -157,7 +157,7 @@ var onAction = () => {
 };
 
 module.exports = (port) => {
-	var wss = new ws.Server({port: port});
+	var wss = new ws.Server({server});
 	wss.on('connection', onConnection);
 	setInterval(onUpdate, 1000);
 	setInterval(onAction, 5000);

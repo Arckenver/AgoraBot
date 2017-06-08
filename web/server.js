@@ -8,7 +8,7 @@ var app = require('./app');
 
 var server = http.createServer(app);
 
-require('./wss')(8000);
+require('./wss')(server);
 
 server.listen(7801, () => {
 	console.log('Server listening...');
