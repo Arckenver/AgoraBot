@@ -6,10 +6,6 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
 
-pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
-pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
-
-
 executing_action = False
 
 
@@ -18,6 +14,8 @@ def do_nothing():
 
 
 def move_forward():
+    pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
+    pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
     print("Starting motors")
     pin_moteur_gauche.start(0.9)
     pin_moteur_droit.start(0.9)
@@ -72,10 +70,12 @@ def execute_action(action):
     execute_action = False
 
 
-if __name__ == "__main__":
+def test():
     power = float(raw_input("power: "))
     duration = float(raw_input("duration: "))
 
+    pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
+    pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
     print("Starting motors")
     pin_moteur_gauche.start(power)
     pin_moteur_droit.start(power)
@@ -84,4 +84,7 @@ if __name__ == "__main__":
     print("Stopping motors")
     pin_moteur_gauche.stop()
     pin_moteur_droit.stop()
+
+if __name__ == "__main__":
+    test()
     GPIO.cleanup()
