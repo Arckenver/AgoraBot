@@ -34,9 +34,9 @@ def turn_left_backward():
 
 
 def execute_action(action):
-    print("Error: Invalid action '%s'" + action)
+    print("Executing action {0}".format(action))
     if executing_action:
-        print("Can't execute action '%s': already executing another action", action)
+        print("Can't execute action {0}: already executing another action".format(action))
     else:
         execute_action = True
         if action == "MOVE_FORWARD":
@@ -51,4 +51,4 @@ def execute_action(action):
             turn_left_backward()
         else:
             execute_action = False
-            print("Error: Invalid action '%s'" + action)
+            print("Error: Invalid action {0}".format(action))
