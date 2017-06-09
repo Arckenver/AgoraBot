@@ -70,3 +70,17 @@ def execute_action(action):
 
     print("Action executed")
     execute_action = False
+
+
+if __name__ == "__main__":
+    power = float(raw_input("power: "))
+    duration = float(raw_input("duration: "))
+
+    print("Starting motors")
+    pin_moteur_gauche.start(power)
+    pin_moteur_droit.start(power)
+    print("Go to sleep for " + duration + " seconds")
+    time.sleep(duration)
+    print("Stopping motors")
+    pin_moteur_gauche.stop()
+    pin_moteur_droit.stop()
