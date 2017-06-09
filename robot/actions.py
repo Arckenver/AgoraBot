@@ -81,10 +81,16 @@ def test():
     pin_moteur_droit.start(power)
     print("Go to sleep for {0} seconds".format(duration))
     time.sleep(duration)
+    print("Setting duty cycle to 0")
+    pin_moteur_gauche.ChangeDutyCycle(0)
+    pin_moteur_droit.ChangeDutyCycle(0)
     print("Stopping motors")
     pin_moteur_gauche.stop()
     pin_moteur_droit.stop()
+    print("Ending test")
 
 if __name__ == "__main__":
     test()
+    time.sleep(3)
+    print("Cleaning up")
     GPIO.cleanup()
