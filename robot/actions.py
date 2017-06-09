@@ -2,13 +2,18 @@ import RPi.GPIO as GPIO
 import time
 
 
-#GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BOARD)
 
-#pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
-#pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
+pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
+pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
 
 
 executing_action = False
+
+
+def do_nothing():
+    print("The robot is doing nothing")
+
 
 def move_forward():
     pin_moteur_gauche.start(0.9)
@@ -40,7 +45,9 @@ def execute_action(action):
         print("Can't execute action {0}: already executing another action".format(action))
     else:
         execute_action = True
-        if action == "MOVE_FORWARD":
+        if action == None:
+            do_nothing()
+        elif action == "MOVE_FORWARD":
             move_forward()
         elif action == "TURN_RIGHT":
             turn_right()
