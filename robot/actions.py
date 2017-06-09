@@ -79,7 +79,7 @@ if __name__ == "__main__":
     print("Starting motors")
     pin_moteur_gauche.start(power)
     pin_moteur_droit.start(power)
-    print("Go to sleep for " + duration + " seconds")
+    print("Go to sleep for {0} seconds".format(duration))
     time.sleep(duration)
     print("Stopping motors")
     pin_moteur_gauche.stop()
