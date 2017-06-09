@@ -18,9 +18,12 @@ def do_nothing():
 
 
 def move_forward():
+    print("Starting motors")
     pin_moteur_gauche.start(0.9)
     pin_moteur_droit.start(0.9)
+    print("Go to sleep")
     time.sleep(0.5)
+    print("Stopping motors")
     pin_moteur_gauche.stop()
     pin_moteur_droit.stop()
 
@@ -45,20 +48,25 @@ def execute_action(action):
     print("Executing action {0}".format(action))
     if executing_action:
         print("Can't execute action {0}: already executing another action".format(action))
+        return
+
+    execute_action = True
+    if action == None:
+        do_nothing()
+    elif action == "MOVE_FORWARD":
+        move_forward()
+    elif action == "TURN_RIGHT":
+        turn_right()
+    elif action == "TURN_LEFT":
+        turn_left()
+    elif action == "TURN_RIGHT_BACKWARD":
+        turn_right_backward()
+    elif action == "TURN_LEFT_BACKWARD":
+        turn_left_backward()
     else:
-        execute_action = True
-        if action == None:
-            do_nothing()
-        elif action == "MOVE_FORWARD":
-            move_forward()
-        elif action == "TURN_RIGHT":
-            turn_right()
-        elif action == "TURN_LEFT":
-            turn_left()
-        elif action == "TURN_RIGHT_BACKWARD":
-            turn_right_backward()
-        elif action == "TURN_LEFT_BACKWARD":
-            turn_left_backward()
-        else:
-            execute_action = False
-            print("Error: Invalid action {0}".format(action))
+        execute_action = False
+        print("Error: Invalid action {0}".format(action))
+        return
+
+    print("Action executed")
+    execute_action = False
