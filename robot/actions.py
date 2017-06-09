@@ -3,6 +3,8 @@ import time
 
 
 GPIO.setmode(GPIO.BOARD)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 pin_moteur_gauche = GPIO.PWM(16, 50) # GPIO 23
 pin_moteur_droit = GPIO.PWM(18, 50) # GPIO 24
