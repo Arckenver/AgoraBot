@@ -22,7 +22,7 @@ def move_forward():
     pin_moteur_gauche.start(0.9)
     pin_moteur_droit.start(0.9)
     print("Go to sleep")
-    time.sleep(0.5)
+    time.sleep(2)
     print("Stopping motors")
     pin_moteur_gauche.stop()
     pin_moteur_droit.stop()
