@@ -22,6 +22,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "pug": "^2.0.0-beta10",
+    "serve-favicon": "^2.4.3",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
