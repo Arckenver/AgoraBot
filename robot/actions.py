@@ -109,4 +109,5 @@ def test():
 
 if __name__ == "__main__":
     test()
+    time.sleep(0.5)
     GPIO.cleanup()
