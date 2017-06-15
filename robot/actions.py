@@ -3,7 +3,8 @@ import time
 
 
 STOPPED_MOTOR_DUTY_CYCLE = 7.0
-FORWARD_MOTOR_DUTY_CYCLE = 9.0
+FORWARD_MOTOR_DUTY_CYCLE = 8.0
+BACKWARD_MOTOR_DUTY_CYCLE = 6.0
 MIN_SERVO_DUTY_CYCLE = 2.0
 MID_SERVO_DUTY_CYCLE = 5.7
 MAX_SERVO_DUTY_CYCLE = 9.4
@@ -29,30 +30,35 @@ def do_nothing():
 
 
 def move_forward():
-    print("Starting motors")
     motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
-    print("Go to sleep")
     time.sleep(2)
-    print("Stopping motors")
     motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
 def turn_right():
-    pass
+    motor_pin_left.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
+    time.sleep(2)
+    motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
 def turn_left():
-    pass
+    motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
+    time.sleep(2)
+    motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
-def turn_right_backward():
-    pass
-
-
-def turn_left_backward():
-    pass
+def move_forward():
+    motor_pin_left.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
+    time.sleep(2)
+    motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
 def look_around():
@@ -93,20 +99,12 @@ def execute_action(action):
     executing_action = False
 
 
-def test():
-    dc = 1.0
-    while dc > 0:
-        dc = float(raw_input("duty cycle: "))
-        servo_pin.ChangeDutyCycle(dc)
-    print("Stopping")
+def quit():
+    print("Stopping motors and servo")
+    motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     servo_pin.ChangeDutyCycle(MID_SERVO_DUTY_CYCLE)
-    print("Ending test")
-
-
-if __name__ == "__main__":
-    move_forward()
-    time.sleep(10)
-    print("Quitting")
+    time.sleep(2)
     motor_pin_left.stop()
     motor_pin_right.stop()
     servo_pin.stop()
