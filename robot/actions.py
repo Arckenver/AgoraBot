@@ -3,6 +3,7 @@ import time
 
 
 STOPPED_MOTOR_DUTY_CYCLE = 7.0
+MIDDLE_SERVO_DUTY_CYCLE = 7.0
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
@@ -15,6 +16,7 @@ servo_pin_right = GPIO.PWM(11, 50) # GPIO 17
 
 motor_pin_left.start(STOPPED_MOTOR_DUTY_CYCLE)
 motor_pin_right.start(STOPPED_MOTOR_DUTY_CYCLE)
+servo_pin_right.start(MIDDLE_SERVO_DUTY_CYCLE)
 
 executing_action = False
 
@@ -88,20 +90,15 @@ def execute_action(action):
 
 
 def test():
-    global motor_pin_left
-    global motor_pin_right
-
     dc = float(raw_input("duty cycle: "))
     duration = float(raw_input("duration: "))
 
     print("Starting motors")
-    motor_pin_left.start(dc)
-    motor_pin_right.start(dc)
+    servo_pin_right.ChangeDutyCycle(dc)
     print("Go to sleep for {0} seconds".format(duration))
     time.sleep(duration)
     print("Stopping motors")
-    motor_pin_left.start(STOPPED_MOTOR_DUTY_CYCLE)
-    motor_pin_right.start(STOPPED_MOTOR_DUTY_CYCLE)
+    servo_pin_right.ChangeDutyCycle(MIDDLE_SERVO_DUTY_CYCLE)
     print("Ending test")
 
 
