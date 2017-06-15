@@ -104,7 +104,7 @@ def test():
 
 
 if __name__ == "__main__":
-    look_around()
+    move_forward()
     time.sleep(10)
     print("Quitting")
     motor_pin_left.stop()
