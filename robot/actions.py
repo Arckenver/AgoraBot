@@ -5,9 +5,14 @@ import time
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT)
 
 motor_pin_left = GPIO.PWM(16, 50) # GPIO 23
 motor_pin_right = GPIO.PWM(18, 50) # GPIO 24
+servo_pin_right = GPIO.PWM(11, 50) # GPIO 17
+
+motor_pin_left.start(7.5)
+motor_pin_right.start(7.5)
 
 executing_action = False
 
@@ -81,19 +86,19 @@ def execute_action(action):
 
 
 def test():
-    power = float(raw_input("duty cycle: "))
+    dc = float(raw_input("duty cycle: "))
     duration = float(raw_input("duration: "))
 
     motor_pin_left = GPIO.PWM(16, 50) # GPIO 23
     motor_pin_right = GPIO.PWM(18, 50) # GPIO 24
     print("Starting motors")
-    motor_pin_left.start(power)
-    motor_pin_right.start(power)
+    motor_pin_left.start(dc)
+    motor_pin_right.start(dc)
     print("Go to sleep for {0} seconds".format(duration))
     time.sleep(duration)
     print("Stopping motors")
-    motor_pin_left.stop()
-    motor_pin_right.stop()
+    motor_pin_left.start(7.5)
+    motor_pin_right.start(7.5)
     print("Ending test")
 
 
