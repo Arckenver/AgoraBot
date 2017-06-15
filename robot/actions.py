@@ -63,9 +63,9 @@ def turn_left_backward():
 
 def look_around():
     servo_pin.ChangeDutyCycle(MIN_SERVO_DUTY_CYCLE)
-    time.sleep(2)
+    time.sleep(3)
     servo_pin.ChangeDutyCycle(MAX_SERVO_DUTY_CYCLE)
-    time.sleep(2)
+    time.sleep(3)
     servo_pin.ChangeDutyCycle(MID_SERVO_DUTY_CYCLE)
 
 
