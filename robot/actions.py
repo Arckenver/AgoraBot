@@ -102,13 +102,13 @@ def test():
     print("Stopping motors")
     motor_pin_left.start(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.start(STOPPED_MOTOR_DUTY_CYCLE)
-    motor_pin_left.stop()
-    motor_pin_right.stop()
     print("Ending test")
 
 
 if __name__ == "__main__":
     test()
-    time.sleep(1)
+    time.sleep(10)
     print("Quitting")
+    motor_pin_left.stop()
+    motor_pin_right.stop()
     GPIO.cleanup()
