@@ -3,7 +3,9 @@ import time
 
 
 STOPPED_MOTOR_DUTY_CYCLE = 7.0
-MIDDLE_SERVO_DUTY_CYCLE = 7.0
+MIN_SERVO_DUTY_CYCLE = 2.0
+MID_SERVO_DUTY_CYCLE = 6.0
+MAX_SERVO_DUTY_CYCLE = 10.0
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
@@ -16,7 +18,7 @@ servo_pin = GPIO.PWM(11, 50) # GPIO 17
 
 motor_pin_left.start(STOPPED_MOTOR_DUTY_CYCLE)
 motor_pin_right.start(STOPPED_MOTOR_DUTY_CYCLE)
-servo_pin.start(MIDDLE_SERVO_DUTY_CYCLE)
+servo_pin.start(MID_SERVO_DUTY_CYCLE)
 
 executing_action = False
 
@@ -59,6 +61,14 @@ def turn_left_backward():
     pass
 
 
+def look_around():
+    servo_pin.ChangeDutyCycle(MIN_SERVO_DUTY_CYCLE)
+    time.sleep(2)
+    servo_pin.ChangeDutyCycle(MAX_SERVO_DUTY_CYCLE)
+    time.sleep(2)
+    servo_pin.ChangeDutyCycle(MID_SERVO_DUTY_CYCLE)
+
+
 def execute_action(action):
     global executing_action
 
@@ -95,13 +105,15 @@ def test():
         dc = float(raw_input("duty cycle: "))
         servo_pin.ChangeDutyCycle(dc)
     print("Stopping")
-    servo_pin.ChangeDutyCycle(MIDDLE_SERVO_DUTY_CYCLE)
+    servo_pin.ChangeDutyCycle(MID_SERVO_DUTY_CYCLE)
     print("Ending test")
 
 
 if __name__ == "__main__":
-    test()
+    look_around()
     time.sleep(10)
     print("Quitting")
+    motor_pin_left.stop()
+    motor_pin_right.stop()
     servo_pin.stop()
     GPIO.cleanup()
