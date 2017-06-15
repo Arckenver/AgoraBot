@@ -81,7 +81,7 @@ def execute_action(action):
 
 
 def test():
-    power = float(raw_input("power: "))
+    power = float(raw_input("duty cycle: "))
     duration = float(raw_input("duration: "))
 
     motor_pin_left = GPIO.PWM(16, 50) # GPIO 23
