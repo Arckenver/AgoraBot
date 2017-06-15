@@ -3,9 +3,10 @@ import time
 
 
 STOPPED_MOTOR_DUTY_CYCLE = 7.0
+FORWARD_MOTOR_DUTY_CYCLE = 8.5
 MIN_SERVO_DUTY_CYCLE = 2.0
-MID_SERVO_DUTY_CYCLE = 5.9
-MAX_SERVO_DUTY_CYCLE = 10.0
+MID_SERVO_DUTY_CYCLE = 5.7
+MAX_SERVO_DUTY_CYCLE = 9.4
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
@@ -29,24 +30,17 @@ def do_nothing():
 
 def move_forward():
     print("Starting motors")
-    motor_pin_left.start(0.9)
-    motor_pin_right.start(0.9)
+    motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
     print("Go to sleep")
     time.sleep(2)
     print("Stopping motors")
-    motor_pin_left.stop()
-    motor_pin_right.stop()
+    motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
+    motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
 def turn_right():
-    print("Starting motors")
-    motor_pin_left.start(0.9)
-    motor_pin_right.start(0.9)
-    print("Go to sleep")
-    time.sleep(2)
-    print("Stopping motors")
-    motor_pin_left.stop()
-    motor_pin_right.stop()
+    pass
 
 
 def turn_left():
