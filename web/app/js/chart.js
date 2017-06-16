@@ -19,8 +19,8 @@ const initChart = (callback) => {
 							actions.MOVE_FORWARD,
 							actions.TURN_RIGHT,
 							actions.TURN_LEFT,
-							actions.TURN_RIGHT_BACKWARD,
-							actions.TURN_LEFT_BACKWARD
+							actions.MOVE_BACKWARD,
+							actions.LOOK_AROUND
 						],
 						datasets: [
 							{

@@ -37,8 +37,8 @@ export default class Client
 					chartData[1] = msg.votes.MOVE_FORWARD || 0
 					chartData[2] = msg.votes.TURN_RIGHT || 0
 					chartData[3] = msg.votes.TURN_LEFT || 0
-					chartData[4] = msg.votes.TURN_RIGHT_BACKWARD || 0
-					chartData[5] = msg.votes.TURN_LEFT_BACKWARD || 0
+					chartData[4] = msg.votes.MOVE_BACKWARD || 0
+					chartData[5] = msg.votes.LOOK_AROUND || 0
 					this.chart.update()
 				}
 				break
