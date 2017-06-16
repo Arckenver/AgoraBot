@@ -3,8 +3,8 @@ import time
 
 
 STOPPED_MOTOR_DUTY_CYCLE = 7.0
-FORWARD_MOTOR_DUTY_CYCLE = 6.0
-BACKWARD_MOTOR_DUTY_CYCLE = 8.0
+FORWARD_MOTOR_DUTY_CYCLE = 8.0
+BACKWARD_MOTOR_DUTY_CYCLE = 6.0
 MIN_SERVO_DUTY_CYCLE = 2.0
 MID_SERVO_DUTY_CYCLE = 5.7
 MAX_SERVO_DUTY_CYCLE = 9.4
@@ -32,7 +32,7 @@ def do_nothing():
 def move_forward():
     motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
-    time.sleep(2)
+    time.sleep(3)
     motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
@@ -40,7 +40,7 @@ def move_forward():
 def turn_right():
     motor_pin_left.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
-    time.sleep(2)
+    time.sleep(1)
     motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
@@ -48,12 +48,12 @@ def turn_right():
 def turn_left():
     motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
-    time.sleep(2)
+    time.sleep(1)
     motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
 
-def move_forward():
+def move_backward():
     motor_pin_left.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(BACKWARD_MOTOR_DUTY_CYCLE)
     time.sleep(2)
