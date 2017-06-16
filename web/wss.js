@@ -9,8 +9,8 @@ var actions = [
 	'MOVE_FORWARD',
 	'TURN_RIGHT',
 	'TURN_LEFT',
-	'TURN_RIGHT_BACKWARD',
-	'TURN_LEFT_BACKWARD'
+	'MOVE_BACKWARD',
+	'LOOK_AROUND'
 ];
 
 var clients = {};

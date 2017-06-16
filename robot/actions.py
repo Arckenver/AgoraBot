@@ -32,7 +32,7 @@ def do_nothing():
 def move_forward():
     motor_pin_left.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(FORWARD_MOTOR_DUTY_CYCLE)
-    time.sleep(3)
+    time.sleep(2.5)
     motor_pin_left.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
     motor_pin_right.ChangeDutyCycle(STOPPED_MOTOR_DUTY_CYCLE)
 
@@ -86,10 +86,10 @@ def execute_action(action):
         turn_right()
     elif action == "TURN_LEFT":
         turn_left()
-    elif action == "TURN_RIGHT_BACKWARD":
-        turn_right_backward()
-    elif action == "TURN_LEFT_BACKWARD":
-        turn_left_backward()
+    elif action == "MOVE_BACKWARD":
+        move_backward()
+    elif action == "LOOK_AROUND":
+        look_around()
     else:
         executing_action = False
         print("Error: Invalid action {0}".format(action))
